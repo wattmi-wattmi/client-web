@@ -1,26 +1,35 @@
-workbox.loadModule('workbox-precaching');
-workbox.loadModule('workbox-routing');
-workbox.loadModule('workbox-strategies');
+const CACHE_NAME = "pwa-cache-v1";
+const ASSETS_TO_CACHE = self.__WB_MANIFEST.map(asset => asset.url);
 
-const { precacheAndRoute } = workbox.precaching;
-const { registerRoute } = workbox.routing;
-const { StaleWhileRevalidate } = workbox.strategies;
-precacheAndRoute(self.__WB_MANIFEST);
 
-registerRoute(
-    ({ request }) => request.destination === 'image',
-    new StaleWhileRevalidate()
-);
-
-self.addEventListener('push', (event) => {
-    const data = event.data ? event.data.json() : {};
+self.addEventListener("install", (event) => {
     event.waitUntil(
-        self.registration.showNotification(data.title, {
-            body: data.body,
-            icon: '/icons/icon-192x192.png',
+        caches.open(CACHE_NAME).then((cache) => {
+            return cache.addAll(ASSETS_TO_CACHE);
+        })
+    );
+    self.skipWaiting();
+});
+
+self.addEventListener("activate", (event) => {
+    event.waitUntil(
+        caches.keys().then((cacheNames) => {
+            return Promise.all(
+                cacheNames.map((cache) => {
+                    if (cache !== CACHE_NAME) {
+                        return caches.delete(cache);
+                    }
+                })
+            );
+        })
+    );
+    self.clients.claim();
+});
+
+self.addEventListener("fetch", (event) => {
+    event.respondWith(
+        caches.match(event.request).then((cachedResponse) => {
+            return cachedResponse || fetch(event.request);
         })
     );
 });
-
-self.addEventListener('install', () => self.skipWaiting());
-self.addEventListener('activate', () => self.clients.claim());
