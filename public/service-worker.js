@@ -1,7 +1,7 @@
-// public/sw.js
-importScripts(
-    'https://storage.googleapis.com/workbox-cdn/releases/6.4.1/workbox-sw.js'
-);
+importScripts('/workbox/workbox-sw.js');
+importScripts('/workbox/workbox-routing.prod.js');
+importScripts('/workbox/workbox-strategies.prod.js');
+importScripts('/workbox/workbox-precaching.prod.js');
 
 if (workbox) {
     console.log('[SW] Workbox is loaded 🎉');
