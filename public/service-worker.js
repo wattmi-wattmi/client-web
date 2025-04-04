@@ -1,16 +1,29 @@
-// public/service-worker.js
+// public/sw.js
+importScripts(
+    'https://storage.googleapis.com/workbox-cdn/releases/6.4.1/workbox-sw.js'
+);
 
-self.addEventListener('install', (event) => {
-    console.log('[SW] Installed');
-    self.skipWaiting(); // Optional: Activate the SW immediately
-});
+if (workbox) {
+    console.log('[SW] Workbox is loaded 🎉');
 
-self.addEventListener('activate', (event) => {
-    console.log('[SW] Activated');
-    clients.claim(); // Optional: Take control of open pages
-});
+    // Precache essential files
+    workbox.precaching.precacheAndRoute(self.__WB_MANIFEST || []);
 
-self.addEventListener('fetch', (event) => {
-    // Default fetch handler: passthrough
-    event.respondWith(fetch(event.request));
-});
+    // Cache API responses
+    workbox.routing.registerRoute(
+        ({ url }) => url.pathname.startsWith('/api/'),
+        new workbox.strategies.StaleWhileRevalidate()
+    );
+
+    // Cache images
+    workbox.routing.registerRoute(
+        ({ request }) => request.destination === 'image',
+        new workbox.strategies.StaleWhileRevalidate()
+    );
+
+} else {
+    console.log('[SW] Workbox failed to load ❌');
+}
+
+self.addEventListener('install', () => self.skipWaiting());
+self.addEventListener('activate', () => self.clients.claim());

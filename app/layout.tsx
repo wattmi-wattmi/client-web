@@ -4,31 +4,31 @@ import RegisterSw from "@/app/components/register-sw";
 import "./globals.css";
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+    variable: "--font-geist-sans",
+    subsets: ["latin"],
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+    variable: "--font-geist-mono",
+    subsets: ["latin"],
 });
 
 
 export default function RootLayout({
-  children,
+    children,
 }: Readonly<{
-  children: React.ReactNode;
+    children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-        <RegisterSw />
-      </body>
-    </html>
-  );
+    return (
+        <html lang="en">
+            <body
+                className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+            >
+                {children}
+                <RegisterSw />
+            </body>
+        </html>
+    );
 }
 
 export const metadata: Metadata = {
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
         type: 'website',
         title: 'Wattmi Wattmi',
         description: 'A chat application with search-intensive features',
-        siteName: 'PWA App',
+        siteName: 'Wattmi',
         // url: 'https://yourdomain.com',
         // images: ['https://yourdomain.com/icons/apple-touch-icon.png'],
     },
@@ -76,5 +76,5 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#000000',
+    themeColor: '#000000',
 }
