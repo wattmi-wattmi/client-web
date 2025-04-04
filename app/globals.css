@@ -1,11 +1,21 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+    --font-sans: var(--font-geist-sans);
+    --font-mono: var(--font-geist-mono);
+
+    --text-responsive : clamp(0.5rem, 1vw + 0.7rem, 2.5rem);
+    
+
+    --breakpoint-*: initial;
+    --breakpoint-tablet: 40rem;
+    --breakpoint-laptop: 64rem;
+    --breakpoint-desktop: 80rem;
+
 }
 
 
 body {
   font-family: Arial, Helvetica, sans-serif;
+  font-size: var(--text-responsive);
 }

@@ -3,7 +3,7 @@ import { icons } from '@/constants/icons';
 export default function Home() {
     return (
         <div className="">
-            My Home Page
+            <div className=''>My Home</div>
             <div className=''>
                  <Icon icon={icons.home} />
             </div>
