@@ -10,10 +10,14 @@
   },
   "dependencies": {
     "@iconify/react": "^5.2.1",
+    "@supabase/ssr": "^0.6.1",
+    "@supabase/supabase-js": "^2.49.4",
     "next": "15.2.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "workbox-cacheable-response": "^7.3.0",
     "workbox-core": "^7.3.0",
+    "workbox-expiration": "^7.3.0",
     "workbox-precaching": "^7.3.0",
     "workbox-routing": "^7.3.0",
     "workbox-strategies": "^7.3.0"

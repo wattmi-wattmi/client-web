@@ -6,7 +6,7 @@ export default function MainLayout ({ children } : Readonly<{ children : React.R
     return (
         <>
             <header></header>
-            <main>
+            <main className="grid place-items-center min-h-[100dvh]">
                 { children }
             </main>
             <footer className="fixed bottom-0 left-0 w-full px-3 grid grid-cols-3 gap-2 pb-7">
