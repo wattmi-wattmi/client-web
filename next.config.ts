@@ -33,7 +33,7 @@ const nextConfig: NextConfig = {
                     },
                     {
                         key: 'Content-Security-Policy',
-                        value: "default-src 'self'; script-src 'self'; connect-src 'self' https://api.iconify.design",
+                        value: "default-src 'self'; script-src 'self' https://api.iconify.design https://storage.googleapis.com; connect-src 'self' https://api.iconify.design https://storage.googleapis.com",
                     },
                 ],
             },

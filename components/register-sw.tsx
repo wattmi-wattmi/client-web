@@ -6,7 +6,7 @@ export default function RegisterSw() {
         console.log('[SW] Initializing...');
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker
-                .register('/service-worker.js', { type : 'module' })
+                .register('/service-worker.js')
                 .then((reg) => console.log('[SW] Registered:', reg))
                 .catch((err) => console.error('[SW] Registration failed:', err));
         } else {
