@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import RegisterSw from "@/components/register-sw";
 import "./globals.css";
+import Head from "next/head";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -21,6 +22,19 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
+            <Head>
+                <link
+                    rel="apple-touch-startup-image"
+                    href="/icons/splash-640x1136.png"
+                    media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
+                />
+                <link
+                    rel="apple-touch-startup-image"
+                    href="/icons/splash-750x1334.png"
+                    media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
+                />
+            </Head>
+
             <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
@@ -39,6 +53,7 @@ export const metadata: Metadata = {
         capable: true,
         statusBarStyle: 'black-translucent',
         title: 'Wattmi Wattmi',
+
     },
     formatDetection: {
         telephone: false,
@@ -77,4 +92,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
     themeColor: '#000000',
+    width: 'device-width',
+    initialScale: 1,
+    viewportFit: 'cover'
 }

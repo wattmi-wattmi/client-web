@@ -14,6 +14,7 @@ export default function RegisterForm({ toggle_is_login } : IProps) {
     const [ password, set_password ] = React.useState<string>('');
     // const [ confirm_password, set_confirm_password ] = React.useState<string>('');
     const [ gender, set_gender ] = React.useState<TGender>('female');
+    console.log(set_gender);
      
     return (
         <div className="">

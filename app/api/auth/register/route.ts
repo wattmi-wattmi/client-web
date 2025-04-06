@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
             throw new Error(error.message);
         }
         if (data.user && data.session) {
-            const { data : user_data, error : user_data_error } = await supabase
+            const { error : user_data_error } = await supabase
                 .from('user_data')
                 .insert([
                     { user_id : data.user.id, username, gender },
