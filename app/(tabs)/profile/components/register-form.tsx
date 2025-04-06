@@ -14,11 +14,10 @@ export default function RegisterForm({ toggle_is_login } : IProps) {
     const [ password, set_password ] = React.useState<string>('');
     // const [ confirm_password, set_confirm_password ] = React.useState<string>('');
     const [ gender, set_gender ] = React.useState<TGender>('female');
-    console.log(gender, set_gender);
      
     return (
         <div className="">
-            <form className="w-full" onSubmit={handle_login}>
+            <form className="w-full" onSubmit={handle_register}>
                 <label htmlFor="username" className="w-full">Username:</label>
                 <input id="username" value={username} onChange={e => set_username(e.target.value)} name="username" type="text" className="w-full bg-white" required />
                 <label htmlFor="password" className="w-full">Password:</label>
@@ -29,7 +28,7 @@ export default function RegisterForm({ toggle_is_login } : IProps) {
         </div>
     );
 
-    async function handle_login (e : FormEvent<HTMLFormElement>) {
+    async function handle_register (e : FormEvent<HTMLFormElement>) {
         try {
             e.preventDefault();
             set_loading(true);
@@ -37,7 +36,7 @@ export default function RegisterForm({ toggle_is_login } : IProps) {
             const res = await fetch( url , {
                 method : 'POST', 
                 headers : { 'Content-Type' : 'application/json' }, 
-                body : JSON.stringify({ username, password })
+                body : JSON.stringify({ username, password, gender })
             });
             const data = await res.json();
             if(data.error) throw new Error((data.error as IErrorResponse).message);
