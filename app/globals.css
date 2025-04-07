@@ -4,7 +4,9 @@
     --font-sans: var(--font-geist-sans);
     --font-mono: var(--font-geist-mono);
 
-    --text-responsive : clamp(0.5rem, 1vw + 0.7rem, 2.5rem);
+    --text-responsive : clamp(0.5rem, 2vw + 0.7rem, 2.5rem);
+    --text-responsive-lg : clamp(1.5rem, 2vw + 4.5rem, 10.5rem);
+    --text-responsive-xl : clamp(1.5rem, 2vw + 5.5rem, 10.5rem);
     
 
     --breakpoint-*: initial;
@@ -16,7 +18,17 @@
 
 @layer components {
     .px-container {
-        @apply px-3 tablet:px-10 laptop:px-14 desktop:px-20;
+        padding-inline: 0.75rem;
+        @variant tablet {
+            padding-inline : 3.5rem;
+        }
+        @variant desktop {
+            padding-inline : 5rem;
+        }
+    }
+    .container-content {
+        margin-inline: auto;
+        max-width: 1280px;
     }
 }
 

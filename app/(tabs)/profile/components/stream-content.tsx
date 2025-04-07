@@ -9,7 +9,7 @@ export default async function StreamContent() {
         <div>
             {(error || !data?.user) && (
                 <div>
-                    <AuthForm />
+                    <AuthForm title="Please Login to see your profile" />
                 </div>
             )}
             {data.user && (
