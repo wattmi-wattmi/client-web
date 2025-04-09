@@ -1,9 +1,8 @@
 'use client';
 import React, { FormEvent } from 'react'
-import { IErrorResponse } from '@/types/general';
-import { revalidate_and_redirect } from '@/actions/general';
+import { revalidate_layout_and_redirect } from '@/actions/general';
 import Routes from '@/constants/routes';
-import Api_Routes from '@/constants/api-routes';
+import { login } from '../actions/authenticate';
 
 interface IProps {
     toggle_is_login: () => void
@@ -33,15 +32,8 @@ export default function LoginForm({ toggle_is_login }: IProps) {
         e.preventDefault();
         try {
             set_loading(true);
-            const url = Api_Routes.login();
-            const res = await fetch(url, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username, password })
-            });
-            const data = await res.json();
-            if (data.error) throw new Error((data.error as IErrorResponse).message);
-            await revalidate_and_redirect(Routes.profile);
+            await login(username, password);
+            await revalidate_layout_and_redirect(Routes.profile);
         } catch (e) {
             console.log((e as Error).message);
         } finally {

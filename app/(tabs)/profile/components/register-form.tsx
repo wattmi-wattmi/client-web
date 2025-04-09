@@ -1,10 +1,10 @@
 'use client';
 import React from 'react'
-import { IErrorResponse, TGender } from '@/types/general';
-import { revalidate_and_redirect } from '@/actions/general';
+import { TGender } from '@/types/general';
+import { revalidate_layout_and_redirect } from '@/actions/general';
 import Routes from '@/constants/routes';
-import Api_Routes from '@/constants/api-routes';
 import CheckBox from '@/components/check-box';
+import { register } from '../actions/authenticate';
 interface IProps {
     toggle_is_login: () => void
 }
@@ -61,15 +61,8 @@ export default function RegisterForm({ toggle_is_login }: IProps) {
             e.preventDefault();
             if(!is_valid_form(username, password, confirm_password)) return;
             set_loading(true);
-            const url = Api_Routes.register();
-            const res = await fetch(url, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username, password, gender })
-            });
-            const data = await res.json();
-            if (data.error) throw new Error((data.error as IErrorResponse).message);
-            await revalidate_and_redirect(Routes.profile);
+            await register(username, password, gender);
+            await revalidate_layout_and_redirect(Routes.profile);
         } catch (e) {
             console.log((e as Error).message);
         } finally {
