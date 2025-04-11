@@ -1,8 +1,9 @@
-import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import type {Metadata, Viewport} from "next";
+import {Geist, Geist_Mono} from "next/font/google";
 import RegisterSw from "@/components/register-sw";
 import "./globals.css";
 import Head from "next/head";
+import Auth_Context_Provider from "@/contexts/auth-context";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -16,31 +17,31 @@ const geistMono = Geist_Mono({
 
 
 export default function RootLayout({
-    children,
-}: Readonly<{
+                                       children,
+                                   }: Readonly<{
     children: React.ReactNode;
 }>) {
     return (
         <html lang="en">
-            <Head>
-                <link
-                    rel="apple-touch-startup-image"
-                    href="/icons/splash-640x1136.png"
-                    media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
-                />
-                <link
-                    rel="apple-touch-startup-image"
-                    href="/icons/splash-750x1334.png"
-                    media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
-                />
-            </Head>
+        <Head>
+            <link
+                rel="apple-touch-startup-image"
+                href="/icons/splash-640x1136.png"
+                media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
+            />
+            <link
+                rel="apple-touch-startup-image"
+                href="/icons/splash-750x1334.png"
+                media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
+            />
+        </Head>
 
-            <body
-                className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-            >
+        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} >
+            <Auth_Context_Provider>
                 {children}
-                <RegisterSw />
-            </body>
+            </Auth_Context_Provider>
+            <RegisterSw/>
+        </body>
         </html>
     );
 }
@@ -64,9 +65,9 @@ export const metadata: Metadata = {
         shortcut: '/icons/favicon.ico',
         apple: [
             '/icons/apple-touch-icon.png',
-            { url: '/icons/touch-icon-ipad.png', sizes: '152x152' },
-            { url: '/icons/touch-icon-iphone-retina.png', sizes: '180x180' },
-            { url: '/icons/touch-icon-ipad-retina.png', sizes: '167x167' },
+            {url: '/icons/touch-icon-ipad.png', sizes: '152x152'},
+            {url: '/icons/touch-icon-iphone-retina.png', sizes: '180x180'},
+            {url: '/icons/touch-icon-ipad-retina.png', sizes: '167x167'},
         ],
     },
     twitter: {
@@ -94,8 +95,8 @@ export const viewport: Viewport = {
     themeColor: '#000000',
     width: 'device-width',
     initialScale: 1,
-    maximumScale : 1,
-    viewportFit: 'cover', 
-    userScalable : false
-    
+    maximumScale: 1,
+    viewportFit: 'cover',
+    userScalable: false
+
 }

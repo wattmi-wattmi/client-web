@@ -1,15 +1,16 @@
 'use client';
 import React from 'react'
 import { TGender } from '@/types/general';
-import { revalidate_layout_and_redirect } from '@/actions/general';
-import Routes from '@/constants/routes';
 import CheckBox from '@/components/check-box';
 import { register } from '../actions/authenticate';
+import {Use_Auth_Context} from "@/contexts/auth-context";
+
 interface IProps {
     toggle_is_login: () => void
 }
 
 export default function RegisterForm({ toggle_is_login }: IProps) {
+    const { set_me } = Use_Auth_Context();
     const [loading, set_loading] = React.useState<boolean>(false);
     const [username, set_username] = React.useState<string>('');
     const [password, set_password] = React.useState<string>('');
@@ -61,10 +62,11 @@ export default function RegisterForm({ toggle_is_login }: IProps) {
             e.preventDefault();
             if(!is_valid_form(username, password, confirm_password)) return;
             set_loading(true);
-            await register(username, password, gender);
-            await revalidate_layout_and_redirect(Routes.profile);
+            const user = await register(username, password, gender);
+            set_me(user);
         } catch (e) {
             console.log((e as Error).message);
+            set_me(null);
         } finally {
             set_loading(false);
         }

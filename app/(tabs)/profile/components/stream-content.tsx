@@ -1,17 +1,14 @@
 'use client'
 import AuthForm from "@/app/(tabs)/profile/components/auth-form";
 import { User } from "@supabase/supabase-js";
-import { use } from "react";
 import { logout } from "../actions/authenticate";
-import { revalidate_layout_and_redirect } from "@/actions/general";
-import Routes from "@/constants/routes";
+import {Use_Auth_Context} from "@/contexts/auth-context";
 
 interface IProps {
-    me_response : Promise<User | null>;
+    me : User | null;
 }
-export default function StreamContent({ me_response }: IProps) {
-    const me = use(me_response);
-    console.log('me', me);
+export default function StreamContent({ me }: IProps) {
+    const { set_me } = Use_Auth_Context();
     return (
         <div>
             {(!me) && (
@@ -34,7 +31,7 @@ export default function StreamContent({ me_response }: IProps) {
         const result = await logout();
         if(!result) console.error('error logging out');
         else {
-            revalidate_layout_and_redirect(Routes.home);
+            set_me(null);
         }
     }
 }

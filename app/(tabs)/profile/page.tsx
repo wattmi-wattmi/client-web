@@ -1,16 +1,15 @@
-import { Suspense } from "react";
-import StreamContent from "@/app/(tabs)/profile/components/stream-content";
+'use client';
 import StreamContentFallback from "@/app/(tabs)/profile/components/fallbacks/stream-content-fallback";
-import { get_me } from "./actions/authenticate";
+import {Use_Auth_Context} from "@/contexts/auth-context";
+import StreamContent from "@/app/(tabs)/profile/components/stream-content";
 
-export default async function ProfilePage() {
-    const me_response = get_me();
+export default function ProfilePage() {
+    const { me, loading } = Use_Auth_Context();
+    if (loading) return <StreamContentFallback />
     return (
         <div className="px-container">
             <div className="container-content pt-10">
-                <Suspense fallback={<StreamContentFallback />}>
-                    <StreamContent  me_response={me_response} />
-                </Suspense>
+                <StreamContent me={me} />
             </div>
         </div>
     )
