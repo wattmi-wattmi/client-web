@@ -1,0 +1,12 @@
+services:
+  web:
+    build:
+      context: .
+    environment:
+      NODE_ENV: production
+    ports:
+      - 3000:3000
+    develop:
+      watch:
+        - path: .
+          action: rebuild
