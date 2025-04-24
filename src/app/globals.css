@@ -1,24 +1,71 @@
 @import "tailwindcss";
 
 :root {
-  --primary-sky-blue : #72E2FF;
-  --primary-brown : #EF9747;
-  --primary-yellow : #FFC900;
-  --primary-purple : #FF57B4;
+    --primary-sky-blue: #72E2FF;
+    --primary-brown: #EF9747;
+    --primary-yellow: #FFC900;
+    --primary-purple: #FF57B4;
 }
 
+
 @theme inline {
-  --color-primary-sky-blue: var(--primary-sky-blue);
-  --color-primary-brown: var(--primary-brown);
-  --color-primary-yellow: var(--primary-yellow);
-  --color-primary-purple: var(--primary-purple);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+    --color-primary-sky-blue: var(--primary-sky-blue);
+    --color-primary-brown: var(--primary-brown);
+    --color-primary-yellow: var(--primary-yellow);
+    --color-primary-purple: var(--primary-purple);
+    --font-sans: var(--font-roboto);
+    --font-mono: var(--font-roboto-mono);
+}
+@layer components {
+    .absolute-center {
+        @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
+    }
+
+    .safe-area-top-bottom {
+        padding-top: env(safe-area-inset-top);
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+    .input {
+       @apply border-1 outline-none w-full px-2 py-1;
+    }
+}
+
+@layer utilities {
+    .hide-scrollbar {
+        /* Firefox */
+        scrollbar-width: none;
+
+        /* Safari and Chrome */
+        -ms-overflow-style: none;
+    }
+
+    .hide-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    .text-stroke {
+        color: black;
+        -webkit-text-fill-color: white;
+        -webkit-text-stroke-width: 1px;
+        -webkit-text-stroke-color: black;
+        font-weight: 900;
+        /*text-shadow:*/
+        /*        3px 3px 0 #000,*/
+        /*        -1px -1px 0 #000,*/
+        /*        1px -1px 0 #000,*/
+        /*        -1px 1px 0 #000,*/
+        /*        1px 1px 0 #000;*/
+    }
 }
 
 
 body {
-  background: var(--primary-brown);
-  color: black;
-  font-family: Arial, Helvetica, sans-serif;
+    background: var(--primary-brown);
+    color: black;
+    font-family: var(--font-sans), sans-serif;
+    box-sizing: border-box;
+    letter-spacing: 0.25rem;
 }
+
+
+
+
