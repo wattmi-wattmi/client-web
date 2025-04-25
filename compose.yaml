@@ -2,11 +2,13 @@ services:
   web:
     build:
       context: .
-    environment:
-      NODE_ENV: production
+      args:
+        - NEXT_PUBLIC_API_DOMAIN
     ports:
       - 3000:3000
     develop:
       watch:
         - path: .
           action: rebuild
+    env_file:
+      - .env

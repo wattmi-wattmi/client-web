@@ -2,6 +2,7 @@ import React from "react";
 import type { Metadata, Viewport } from "next";
 import { Roboto, Roboto_Mono } from "next/font/google";
 import "./globals.css";
+import Auth_Context_Provider from "@/contexts/contexts.auth";
 
 const roboto = Roboto({
   variable: "--font-roboto",
@@ -26,7 +27,9 @@ export default function RootLayout({
     <body
         className={`${roboto.variable} ${robotoMono.variable} antialiased`}
     >
-    {children}
+    <Auth_Context_Provider>
+        {children}
+    </Auth_Context_Provider>
     </body>
     </html>
   );
