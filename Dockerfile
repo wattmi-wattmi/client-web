@@ -1,4 +1,6 @@
 ARG NODE_VERSION=22.13.0
+# Add build argument for API domain with default value
+ARG NEXT_PUBLIC_API_DOMAIN=http://localhost:8000
 
 FROM node:${NODE_VERSION}-alpine as base
 
@@ -14,6 +16,10 @@ RUN --mount=type=bind,source=package.json,target=package.json \
 
 FROM deps as build
 
+# Make the build argument available in this stage
+ARG NEXT_PUBLIC_API_DOMAIN
+ENV NEXT_PUBLIC_API_DOMAIN=${NEXT_PUBLIC_API_DOMAIN}
+
 RUN --mount=type=bind,source=package.json,target=package.json \
     --mount=type=bind,source=package-lock.json,target=package-lock.json \
     --mount=type=cache,target=/root/.npm \
@@ -25,6 +31,8 @@ RUN npm run build
 FROM base as final
 
 ENV NODE_ENV production
+# Set environment variables explicitly for runtime using the build argument
+ENV NEXT_PUBLIC_API_DOMAIN=${NEXT_PUBLIC_API_DOMAIN}
 
 USER node
 

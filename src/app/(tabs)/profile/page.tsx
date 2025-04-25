@@ -16,7 +16,7 @@ export default function Profile_Page() {
     );
     return (
         <div className={'pt-5 pb-10'}>
-            <div className={'text-2xl font-semibold'}>Profile</div>
+            <div className={'text-2xl font-semibold'}>{auth_context.me.username}&apos;s Profile</div>
             <button onClick={handle_logout}>Logout</button>
         </div>
     );

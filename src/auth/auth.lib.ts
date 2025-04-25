@@ -3,8 +3,10 @@ import {Response_Interface, User_Interface} from "@/generals/generals.types";
 import {Login_Interface, Register_Interface} from "@/auth/auth.types";
 
 export async function fetch_login({ username, password } : Login_Interface) {
+    const url = `${Env_Configs.api_domain}${Api_Routes.auth.login()}`;
+    console.log('url', url);
     try {
-        const response = await fetch(Env_Configs.api_domain + Api_Routes.auth.login(), {
+        const response = await fetch(url, {
             method : 'POST',
             credentials : 'include',
             headers : {
@@ -27,8 +29,9 @@ export async function fetch_login({ username, password } : Login_Interface) {
     }
 }
 export async function fetch_register({ username, password, gender } : Register_Interface) {
+    const url = `${Env_Configs.api_domain}${Api_Routes.auth.register()}`;
     try {
-        const response = await fetch(Env_Configs.api_domain + Api_Routes.auth.register(), {
+        const response = await fetch(url, {
             method : 'POST',
             credentials : 'include',
             headers : {
@@ -52,8 +55,9 @@ export async function fetch_register({ username, password, gender } : Register_I
     }
 }
 export async function fetch_logout() {
+    const url = `${Env_Configs.api_domain}${Api_Routes.auth.logout()}`;
     try {
-        const response = await fetch(Env_Configs.api_domain + Api_Routes.auth.logout(), {
+        const response = await fetch(url, {
             method : 'POST',
             credentials : 'include'
         });
@@ -65,8 +69,9 @@ export async function fetch_logout() {
 }
 
 export async function fetch_check_username(username : string) {
+    const url = `${Env_Configs.api_domain}${Api_Routes.auth.check_username()}`;
     try {
-        const response = await fetch(Env_Configs.api_domain + Api_Routes.auth.check_username(), {
+        const response = await fetch(url, {
             method : 'POST',
             credentials : 'include',
             headers : {
