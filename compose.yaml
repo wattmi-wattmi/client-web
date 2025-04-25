@@ -10,3 +10,5 @@ services:
       watch:
         - path: .
           action: rebuild
+    env_file:
+      - .env
