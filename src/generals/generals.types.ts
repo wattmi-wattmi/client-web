@@ -14,4 +14,16 @@ export interface User_Interface {
     age : number | null;
 }
 
+export interface Response_Interface<T> {
+    success : boolean;
+    message : string;
+    data : T | null;
+    error : unknown;
+    token : string | null,
+    pagination : Pagination_Interface | null
+}
+
+export interface Pagination_Interface {
+    total : number;
+}
 export type Gender_Type = (typeof Genders)[keyof typeof Genders];

@@ -4,7 +4,7 @@ import React from "react";
 import Login_Form from "@/modules/profile/components/profile.login-form";
 
 export default function Auth_Form () {
-    const [ is_old_user, set_is_old_user ] = React.useState<boolean>(false);
+    const [ is_old_user, set_is_old_user ] = React.useState<boolean>(true);
     return (
         <div>
             <div className={'mt-5 text-center text-2xl text-stroke'}>Please login to see your profile</div>
