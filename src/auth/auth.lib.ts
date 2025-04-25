@@ -53,7 +53,7 @@ export async function fetch_register({ username, password, gender } : Register_I
 }
 export async function fetch_logout() {
     try {
-        const response = await fetch(Env_Configs.api_domain + '/api/auth/logout', {
+        const response = await fetch(Env_Configs.api_domain + Api_Routes.auth.logout(), {
             method : 'POST',
             credentials : 'include'
         });
@@ -61,5 +61,29 @@ export async function fetch_logout() {
     } catch(e) {
         console.log('error fetching me', e);
         return false;
+    }
+}
+
+export async function fetch_check_username(username : string) {
+    try {
+        const response = await fetch(Env_Configs.api_domain + Api_Routes.auth.check_username(), {
+            method : 'POST',
+            credentials : 'include',
+            headers : {
+                'Content-Type' : 'application/json'
+            },
+            body : JSON.stringify({
+                username
+            })
+        });
+        const data = (await response.json()) as Response_Interface<string>;
+        if(data.success) {
+            return { data : data.message as string, error : null };
+        } else {
+            return { data : null, error : data.message };
+        }
+    } catch(e) {
+        console.log('error checking username', e);
+        return { data : null, error : 'error checking username'};
     }
 }

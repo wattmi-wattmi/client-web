@@ -2,8 +2,6 @@
 import React from "react";
 import {User_Interface} from "@/generals/generals.types";
 import {Api_Routes, Env_Configs} from "@/generals/generals.constants";
-import {fetch_login, fetch_logout, fetch_register} from "@/auth/auth.lib";
-import {Login_Interface, Register_Interface} from "@/auth/auth.types";
 
 interface Auth_Context_Interface {
     me : User_Interface | null;

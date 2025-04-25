@@ -11,7 +11,7 @@ export default function Profile_Page() {
     if(!auth_context.me)
     return (
         <div className={'pt-5 pb-10'}>
-            <Auth_Form/>
+            <Auth_Form message={'Please login to see your profile'} />
         </div>
     );
     return (
