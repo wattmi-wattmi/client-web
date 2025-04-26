@@ -9,7 +9,9 @@ export default function Tabs_Layout ({ children } : { children: React.ReactNode 
                 <Header />
             </div>
             <main className={'flex-1 px-4 border-x-2 border-black box-border overflow-x-auto'}>
-                { children }
+                <div className={'mx-auto w-full max-w-[640px]'}>
+                    { children }
+                </div>
             </main>
             <div>
                 <Footer />
