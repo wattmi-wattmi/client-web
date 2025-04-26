@@ -28,6 +28,9 @@
     .input {
        @apply border-1 outline-none w-full px-2 py-1;
     }
+    .profile-actual-page-white-box {
+        @apply bg-white border-3 p-2 relative;
+    }
 }
 
 @layer utilities {

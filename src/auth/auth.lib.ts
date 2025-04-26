@@ -1,5 +1,9 @@
 import {Api_Routes, Env_Configs} from "@/generals/generals.constants";
-import {Response_Interface, User_Interface} from "@/generals/generals.types";
+import {
+    Response_Interface,
+    User_Interface,
+    User_Interface_Without_Fixed_Properties
+} from "@/generals/generals.types";
 import {Login_Interface, Register_Interface} from "@/auth/auth.types";
 
 export async function fetch_login({ username, password } : Login_Interface) {
@@ -90,5 +94,28 @@ export async function fetch_check_username(username : string) {
     } catch(e) {
         console.log('error checking username', e);
         return { data : null, error : 'error checking username'};
+    }
+}
+export async function fetch_me_update(user_data : Partial<User_Interface_Without_Fixed_Properties>) {
+    const url = `${Env_Configs.api_domain}${Api_Routes.auth.me()}`;
+    console.log('url', url);
+    try {
+        const response = await fetch(url, {
+            method : 'PUT',
+            credentials : 'include',
+            headers : {
+                'Content-Type' : 'application/json'
+            },
+            body : JSON.stringify(user_data)
+        });
+        const data = (await response.json()) as Response_Interface<User_Interface>;
+        if(data.success) {
+            return { data : data.data as User_Interface, error : null };
+        } else {
+            return { data : null, error : data.message };
+        }
+    } catch(e) {
+        console.log('error logging in', e);
+        return { data : null, error : 'error logging in'};
     }
 }

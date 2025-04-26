@@ -1,7 +1,7 @@
 'use client';
-import Register_Form from "@/modules/profile/components/profile.register-form";
+import Register_Form from "@/modules/profile/components/auth-form/profile.auth-form.register-form";
 import React from "react";
-import Login_Form from "@/modules/profile/components/profile.login-form";
+import Login_Form from "@/modules/profile/components/auth-form/profile.auth-form.login-form";
 
 export default function Auth_Form ({ message = 'Please login'} : { message?: string }) {
     const [ is_old_user, set_is_old_user ] = React.useState<boolean>(true);

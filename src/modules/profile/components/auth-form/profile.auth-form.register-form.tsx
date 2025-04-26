@@ -55,6 +55,9 @@ export default function Register_Form() {
                     <Checkbox condition={gender === 'female'} label={'female'} handler={() => set_gender('female')}/>
                     <Checkbox condition={gender === 'male'} label={'male'} handler={() => set_gender('male')}/>
                 </div>
+                <div className={'text-sm text-gray-500 tracking-wide'}>
+                    please choose carefully, gender cannot be changed later
+                </div>
             </div>
             <div className={'text-red-500 text-sm'}>
                 {error}
