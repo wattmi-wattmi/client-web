@@ -3,14 +3,14 @@
 import React from "react";
 import {Icon} from "@iconify/react";
 import {fetch_me_update} from "@/auth/auth.lib";
-import {User_Interface_Without_Id_Username_Password} from "@/generals/generals.types";
+import {User_Interface_Without_Fixed_Properties} from "@/generals/generals.types";
 import {Auth_Context} from "@/contexts/contexts.auth";
 
 interface Props_Interface {
     is_editing: boolean;
     set_is_editing: React.Dispatch<React.SetStateAction<boolean>> & { $$typeof?: symbol };
     set_error : React.Dispatch<React.SetStateAction<string | null>> & { $$typeof?: symbol };
-    user_data : Partial<User_Interface_Without_Id_Username_Password>
+    user_data : Partial<User_Interface_Without_Fixed_Properties>
 }
 
 export default function Actual_Profile_Page_Button_Group({ is_editing, set_is_editing, user_data, set_error }: Props_Interface) {

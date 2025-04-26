@@ -2,7 +2,7 @@ import {Api_Routes, Env_Configs} from "@/generals/generals.constants";
 import {
     Response_Interface,
     User_Interface,
-    User_Interface_Without_Id_Username_Password
+    User_Interface_Without_Fixed_Properties
 } from "@/generals/generals.types";
 import {Login_Interface, Register_Interface} from "@/auth/auth.types";
 
@@ -96,7 +96,7 @@ export async function fetch_check_username(username : string) {
         return { data : null, error : 'error checking username'};
     }
 }
-export async function fetch_me_update(user_data : Partial<User_Interface_Without_Id_Username_Password>) {
+export async function fetch_me_update(user_data : Partial<User_Interface_Without_Fixed_Properties>) {
     const url = `${Env_Configs.api_domain}${Api_Routes.auth.me()}`;
     console.log('url', url);
     try {
