@@ -18,11 +18,11 @@ export default function Actual_Profile_Page_Name({name}: { name: string }) {
     return (
         <div className={'profile-actual-page-white-box'}>
             { is_editing ? (
-                <div>
-                    <input type={'text'} ref={input_ref} value={new_name} onChange={e => set_new_name(e.target.value)} className={'border-none outline-none text-2xl font-semibold'} />
+                <div className={'w-9/12'}>
+                    <input type={'text'} ref={input_ref} value={new_name} onChange={e => set_new_name(e.target.value)} className={'border-none outline-none text-2xl font-semibold w-full'} />
                 </div>
             ) : (
-                <div className={'text-2xl font-semibold'}>
+                <div className={'text-2xl font-semibold w-9/12 break-words'}>
                     {name}
                 </div>
             )}
