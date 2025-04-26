@@ -17,7 +17,7 @@ export default function Actual_Profile_Page_Button_Group({ is_editing, set_is_ed
     const [loading, set_loading] = React.useState<boolean>(false);
     const { set_me } = React.useContext(Auth_Context);
     return (
-        <div className={'absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer flex items-center gap-2'}>
+        <div className={'absolute right-2 top-2 cursor-pointer flex items-center gap-2'}>
             {loading
                 ? <Icon icon={'gg:spinner-two'} className={'animate-spin text-3xl'}/>
                 : (
