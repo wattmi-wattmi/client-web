@@ -1,9 +1,6 @@
 import {Genders} from "@/generals/generals.constants";
 
-export interface User_Interface {
-    id : number;
-    username : string;
-    password : string;
+export interface User_Interface_Without_Id_Username_Password {
     gender : Gender_Type;
     name : string | null;
     region : string | null;
@@ -12,6 +9,11 @@ export interface User_Interface {
     status_message : string | null;
     profile : string | null;
     age : number | null;
+}
+export interface User_Interface extends User_Interface_Without_Id_Username_Password {
+    id : number;
+    username : string;
+    password : string;
 }
 
 export interface Response_Interface<T> {
