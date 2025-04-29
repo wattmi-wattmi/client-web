@@ -63,8 +63,8 @@ export default function Actual_Profile_Page_Interests({ interests }: Interests_P
 function Interests_Renderer ( { interests, is_editing, set_new_interests } : { interests : { id : number, name : string }[], is_editing : boolean, set_new_interests : React.Dispatch<React.SetStateAction<string | null>> & { $$typeof?: symbol} } ) {
    return (
        <div className={'w-full flex items-center flex-wrap gap-2'}>
-           {interests.map(interest => (
-               <div key={interest.id} className={'border-2 flex items-stretch'}>
+           {interests.map((interest, i) => (
+               <div key={i} className={'border-2 flex items-stretch'}>
                    <div className={'bg-primary-yellow px-3 py-1 text-nowrap'}>
                        {interest.name}
                    </div>
