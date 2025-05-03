@@ -1,13 +1,20 @@
 'use client';
-import React, { useRef, useEffect } from "react";
+import React from "react";
 import { io, Socket } from "socket.io-client";
 import {User_Interface} from "@/generals/generals.types";
 import {Api_Routes, Env_Configs} from "@/generals/generals.constants";
 
+/**
+ * Interface for the authentication context
+ */
 interface Auth_Context_Interface {
+    /** Current logged-in user or null if not logged in */
     me : User_Interface | null;
+    /** Function to update the current user */
     set_me : React.Dispatch<React.SetStateAction<User_Interface | null>>;
+    /** Whether the authentication state is loading */
     loading : boolean;
+    /** Function to get the current socket instance */
     get_socket: () => Socket | null;
 }
 
@@ -18,19 +25,24 @@ export const Auth_Context = React.createContext<Auth_Context_Interface>({
     get_socket: () => null,
 });
 
+/**
+ * Provider component for the authentication context
+ * Manages user authentication state and socket connections
+ */
 export default function Auth_Context_Provider({ children } : { children: React.ReactNode }) {
     const [me, set_me] = React.useState<User_Interface | null>(null);
     const [loading, set_loading] = React.useState<boolean>(true);
-    const socket_ref = useRef<Socket | null>(null);
+    const socket_ref = React.useRef<Socket | null>(null);
 
     React.useEffect(() => {
        set_me_from_cookie().catch(e => console.log('error fetching me', e));
     }, []);
 
     // Socket connection management based on user login status
-    useEffect(() => {
+    React.useEffect(() => {
+        // Connect to socket when user is logged in
         if (me !== null) {
-            console.log('Connecting to socket with userId:', me.id);
+            console.log('Connecting to socket with user_id:', me.id);
             socket_ref.current = io(Env_Configs.api_domain, {
                 auth: {
                     user_id: me.id
@@ -46,6 +58,7 @@ export default function Auth_Context_Provider({ children } : { children: React.R
                 console.error('Socket connection error:', error);
             });
         } else {
+            // Disconnect socket when user logs out
             if (socket_ref.current) {
                 console.log('Disconnecting socket');
                 socket_ref.current.disconnect();
@@ -76,6 +89,9 @@ export default function Auth_Context_Provider({ children } : { children: React.R
             {children}
         </Auth_Context.Provider>
     );
+    /**
+     * Fetch the current user from cookies and update the state
+     */
     async function set_me_from_cookie() {
         set_loading(true);
         const me = await fetch_me();
@@ -87,6 +103,10 @@ export default function Auth_Context_Provider({ children } : { children: React.R
 
 
 
+/**
+ * Fetch the current user from the server
+ * @returns The current user or null if not logged in
+ */
 async function fetch_me() {
     try {
         const response = await fetch(Env_Configs.api_domain + Api_Routes.auth.me(), {
