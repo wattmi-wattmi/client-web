@@ -58,7 +58,7 @@ export default function Auth_Context_Provider({ children } : { children: React.R
                 console.error('Socket connection error:', error);
             });
         } else {
-            // Disconnect socket when user logs out
+            // Disconnect socket when the user logs out
             if (socket_ref.current) {
                 console.log('Disconnecting socket');
                 socket_ref.current.disconnect();

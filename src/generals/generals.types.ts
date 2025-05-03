@@ -14,6 +14,7 @@ export interface User_Interface extends User_Interface_Without_Fixed_Properties 
     username : string;
     password : string;
     gender : Gender_Type;
+    active_now : boolean;
 }
 
 export interface Response_Interface<T> {
@@ -26,6 +27,8 @@ export interface Response_Interface<T> {
 }
 
 export interface Pagination_Interface {
-    total : number;
+    page: number;
+    total_pages: number;
+    total_items: number;
 }
 export type Gender_Type = (typeof Genders)[keyof typeof Genders];

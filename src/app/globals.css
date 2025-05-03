@@ -5,6 +5,8 @@
     --primary-brown: #EF9747;
     --primary-yellow: #FFC900;
     --primary-purple: #FF57B4;
+    --secondary-purple: #80365F;
+    --active-green: #45D022;
 }
 
 
@@ -13,6 +15,8 @@
     --color-primary-brown: var(--primary-brown);
     --color-primary-yellow: var(--primary-yellow);
     --color-primary-purple: var(--primary-purple);
+    --color-secondary-purple: var(--secondary-purple);
+    --color-active-green: var(--active-green);
     --font-sans: var(--font-roboto);
     --font-mono: var(--font-roboto-mono);
 }
@@ -51,12 +55,29 @@
         -webkit-text-stroke-width: 1px;
         -webkit-text-stroke-color: black;
         font-weight: 900;
-        /*text-shadow:*/
-        /*        3px 3px 0 #000,*/
-        /*        -1px -1px 0 #000,*/
-        /*        1px -1px 0 #000,*/
-        /*        -1px 1px 0 #000,*/
-        /*        1px 1px 0 #000;*/
+    }
+    .text-stroke-2 {
+        color: black;
+        -webkit-text-fill-color: white;
+        -webkit-text-stroke-width: 2px;
+        -webkit-text-stroke-color: black;
+        font-weight: 900;
+    }
+
+    /* Custom skeleton loading animation */
+    .animate-skeleton {
+        animation: skeleton-pulse 1.5s ease-in-out infinite;
+        background: linear-gradient(90deg, rgba(255,255,255,0.1), rgba(255,255,255,0.3), rgba(255,255,255,0.1));
+        background-size: 200% 100%;
+    }
+
+    @keyframes skeleton-pulse {
+        0% {
+            background-position: 0% 0%;
+        }
+        100% {
+            background-position: 200% 0%;
+        }
     }
 }
 
