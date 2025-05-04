@@ -21,7 +21,7 @@ export async function fetch_users({gender, limit, page, search}: User_Search_Que
     }
 }
 
-export function get_formatted_user_search_queries (search_params : { [key: string]: string | string[] | undefined }) {
+export function get_formatted_user_search_queries (search_params : { [key: string]: string | string[] | undefined }) : User_Search_Queries_Interface {
     return {
         gender : get_gender_from_gender_of_search_params(search_params.gender),
         limit : search_params.limit ? Number(search_params.limit) : undefined,
