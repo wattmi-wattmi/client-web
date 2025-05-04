@@ -34,7 +34,7 @@ ENV NODE_ENV production
 # Set environment variables explicitly for runtime using the build argument
 ENV NEXT_PUBLIC_API_DOMAIN=${NEXT_PUBLIC_API_DOMAIN}
 
-USER node
+USER root
 
 COPY package.json .
 
@@ -44,6 +44,10 @@ COPY --from=build /usr/src/app/.next ./.next
 COPY --from=build /usr/src/app/next.config.ts ./
 COPY --from=build /usr/src/app/.env* ./
 
+# Fix permission issue
+RUN chown -R node:node .next
+
+USER node
 
 EXPOSE 3000
 
