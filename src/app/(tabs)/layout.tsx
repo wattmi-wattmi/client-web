@@ -8,8 +8,8 @@ export default function Tabs_Layout ({ children } : { children: React.ReactNode 
             <div>
                 <Header />
             </div>
-            <main className={'flex-1 px-4 border-x-2 border-black box-border overflow-x-auto'}>
-                <div className={'mx-auto w-full max-w-[640px]'}>
+            <main className={'flex-1 px-4 border-x-2 border-black box-border overflow-y-auto hide-scrollbar'}>
+                <div className={'mx-auto w-full max-w-[800px]'}>
                     { children }
                 </div>
             </main>
