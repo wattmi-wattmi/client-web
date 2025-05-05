@@ -16,7 +16,7 @@ export default function Profile_Page() {
     );
     return (
         <div className={'pt-5 pb-10'}>
-            <Actual_Profile_Page />
+            <Actual_Profile_Page user={auth_context.me} />
         </div>
     );
 }

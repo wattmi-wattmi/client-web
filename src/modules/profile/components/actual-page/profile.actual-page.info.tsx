@@ -8,9 +8,10 @@ interface Info_Props_Interface {
     region: string | null;
     gender: Gender_Type;
     username: string;
+    is_own_profile: boolean;
 }
 
-export default function Actual_Profile_Page_Info({age, region, gender, username}: Info_Props_Interface) {
+export default function Actual_Profile_Page_Info({age, region, gender, username, is_own_profile}: Info_Props_Interface) {
     const [is_editing, set_is_editing] = React.useState<boolean>(false);
     const [error, set_error] = React.useState<string | null>(null);
     const [new_age, set_new_age] = React.useState<string>(age ? String(age) : '');
@@ -49,7 +50,7 @@ export default function Actual_Profile_Page_Info({age, region, gender, username}
                 )}
             </div>
             <div className={'text-red-500 text-sm'}>{ error }</div>
-            <Actual_Profile_Page_Button_Group
+            { is_own_profile && <Actual_Profile_Page_Button_Group
                 is_editing={is_editing}
                 set_is_editing={set_is_editing}
                 set_error={set_error}
@@ -57,7 +58,7 @@ export default function Actual_Profile_Page_Info({age, region, gender, username}
                     age : new_age ? Number(new_age) : null,
                     region : new_region || null
                 }}
-            />
+            /> }
         </div>
     );
 }

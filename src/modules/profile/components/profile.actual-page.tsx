@@ -8,19 +8,22 @@ import Actual_Profile_Page_Info from "@/modules/profile/components/actual-page/p
 import Actual_Profile_Page_Interests from "@/modules/profile/components/actual-page/profile.actual-page.interests";
 import Actual_Profile_Page_About_Me from "@/modules/profile/components/actual-page/profile.actual-page.about-me";
 import Actual_Profile_Page_Message from "@/modules/profile/components/actual-page/profile.actual-page.message";
+import {User_Interface} from "@/generals/generals.types";
 
-export default function Actual_Profile_Page() {
+export default function Actual_Profile_Page({ user } : { user : User_Interface }) {
     const auth_context = React.useContext(Auth_Context);
-    if(!auth_context.me) return null;
+    const is_own_profile = !!auth_context.me && auth_context.me.id === user.id;
     return (
         <div className={'space-y-7'}>
-            <Actual_Profile_Page_Name name={auth_context.me.name || auth_context.me.username} />
+            <Actual_Profile_Page_Name name={user.name || user.username} is_own_profile={is_own_profile}/>
             <Actual_Profile_Page_Profile />
-            <Actual_Profile_Page_Info username={auth_context.me.username} age={auth_context.me.age} region={auth_context.me.region} gender={auth_context.me.gender} />
-            <Actual_Profile_Page_Interests interests={auth_context.me.interests} />
-            <Actual_Profile_Page_About_Me about_me={auth_context.me.about_me} />
-            <Actual_Profile_Page_Message status_message={auth_context.me.status_message} />
-            <button onClick={handle_logout} className={'bg-primary-purple px-4 py-2 border-3'}>Logout</button>
+            <Actual_Profile_Page_Info username={user.username} age={user.age} region={user.region} gender={user.gender} is_own_profile={is_own_profile} />
+            <Actual_Profile_Page_Interests interests={user.interests} is_own_profile={is_own_profile} />
+            <Actual_Profile_Page_About_Me about_me={user.about_me} is_own_profile={is_own_profile} />
+            <Actual_Profile_Page_Message status_message={user.status_message} is_own_profile={is_own_profile} />
+            { auth_context.me && auth_context.me.id === user.id && (
+                <button onClick={handle_logout} className={'bg-primary-purple px-4 py-2 border-3'}>Logout</button>
+            )}
         </div>
     );
 

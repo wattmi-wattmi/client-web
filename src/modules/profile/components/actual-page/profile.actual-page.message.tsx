@@ -7,9 +7,10 @@ import {Profile_Message_Max_Length} from "@/modules/profile/profile.constants";
 
 interface Message_Props_Interface {
     status_message: User_Interface['status_message'];
+    is_own_profile : boolean;
 }
 
-export default function Actual_Profile_Page_Message({ status_message }: Message_Props_Interface) {
+export default function Actual_Profile_Page_Message({ status_message, is_own_profile }: Message_Props_Interface) {
     const [is_editing, set_is_editing] = React.useState<boolean>(false);
     const [error, set_error] = React.useState<string | null>(null);
     const [new_status_message, set_new_status_message] = React.useState<string | null>(status_message);
@@ -38,7 +39,7 @@ export default function Actual_Profile_Page_Message({ status_message }: Message_
                     </div>
                 </div>
             )}
-            <Actual_Profile_Page_Button_Group is_editing={is_editing} set_is_editing={set_is_editing} set_error={set_error} user_data={{ status_message : new_status_message?.trim() || null }} />
+            { is_own_profile && <Actual_Profile_Page_Button_Group is_editing={is_editing} set_is_editing={set_is_editing} set_error={set_error} user_data={{ status_message : new_status_message?.trim() || null }} /> }
         </div>
     )
 }
