@@ -41,7 +41,7 @@ const APP_TITLE_TEMPLATE = "%s - PWA App";
 const APP_DESCRIPTION = "Best PWA app in the world!";
 
 export const metadata: Metadata = {
-    metadataBase : new URL(Env_Configs.own_domain),
+    metadataBase: Env_Configs.own_domain ? new URL(Env_Configs.own_domain) : process.env.NEXT_PUBLIC_OWN_DOMAIN ? new URL(process.env.NEXT_PUBLIC_OWN_DOMAIN) : null,
     applicationName: APP_NAME,
     title: {
         default: APP_DEFAULT_TITLE,
