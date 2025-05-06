@@ -8,11 +8,11 @@ export default function Tabs_Layout ({ children } : { children: React.ReactNode 
             <div>
                 <Header />
             </div>
-            <div className={'px-4 border-x-2 border-black box-border py-4'}>
+            <div className={'px-4 border-x-2 border-black box-border py-10'}>
                     <Back_Button />
             </div>
             <main className={'flex-1 px-4 border-x-2 border-black box-border overflow-y-auto hide-scrollbar'}>
-                <div className={'mx-auto w-full max-w-[800px]'}>
+                <div className={'mx-auto w-full max-w-[800px] pb-20'}>
                     { children }
                 </div>
             </main>

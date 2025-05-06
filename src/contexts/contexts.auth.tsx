@@ -3,6 +3,7 @@ import React from "react";
 import { io, Socket } from "socket.io-client";
 import {User_Interface} from "@/generals/generals.types";
 import {Api_Routes, Env_Configs} from "@/generals/generals.constants";
+import {revalidate_paths_when_me_change} from "@/auth/auth.actions";
 
 /**
  * Interface for the authentication context
@@ -37,6 +38,10 @@ export default function Auth_Context_Provider({ children } : { children: React.R
     React.useEffect(() => {
        set_me_from_cookie().catch(e => console.log('error fetching me', e));
     }, []);
+
+    React.useEffect(() => {
+        revalidate_paths_when_me_change(me).catch(e => console.log('error revalidating paths', e));
+    }, [me]);
 
     // Socket connection management based on user login status
     React.useEffect(() => {

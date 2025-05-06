@@ -9,7 +9,7 @@ export async function get_fetch_return_object<T>(response: Response | null, erro
         if (response.ok && data.success) {
             return { data: data.data as T, error: null, pagination: data.pagination };
         } else {
-            return { data: null, error: data.message, pagination: data.pagination };
+            return { data: null, error: data.message, pagination: null };
         }
     } catch (e) {
         // fallback in case JSON parse fails or throws
