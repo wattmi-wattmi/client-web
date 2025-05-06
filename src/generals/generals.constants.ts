@@ -6,7 +6,8 @@ export const Genders = {
 } as const;
 
 export const Env_Configs = {
-    api_domain : process.env.NEXT_PUBLIC_API_DOMAIN!
+    api_domain : process.env.NEXT_PUBLIC_API_DOMAIN!,
+    own_domain : process.env.NEXT_PUBLIC_OWN_DOMAIN!,
 } as const;
 
 

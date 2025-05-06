@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from "next";
 import { Roboto, Roboto_Mono } from "next/font/google";
 import "./globals.css";
 import Auth_Context_Provider from "@/contexts/contexts.auth";
+import {Env_Configs} from "@/generals/generals.constants";
 
 const roboto = Roboto({
   variable: "--font-roboto",
@@ -40,6 +41,7 @@ const APP_TITLE_TEMPLATE = "%s - PWA App";
 const APP_DESCRIPTION = "Best PWA app in the world!";
 
 export const metadata: Metadata = {
+    metadataBase : new URL(Env_Configs.own_domain),
     applicationName: APP_NAME,
     title: {
         default: APP_DEFAULT_TITLE,
