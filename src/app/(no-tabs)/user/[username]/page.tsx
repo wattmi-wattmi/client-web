@@ -26,8 +26,8 @@ export default async function User_Detail_Browse_Page({ params } : Page_Props_In
 
 
 
-export async function generateMetadata({ params }: { params: { username: string } }): Promise<Metadata> {
-    const username = params.username;
+export async function generateMetadata({ params }: Page_Props_Interface): Promise<Metadata> {
+    const username = (await params).username;
     const user_data = await fetch_user_by_username(username);
 
     if (!user_data.data) {
