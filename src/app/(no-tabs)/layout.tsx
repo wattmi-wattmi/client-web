@@ -1,6 +1,6 @@
 import React from 'react';
-import Footer from "@/modules/(tabs)/components/tabs.footer";
 import Header from "@/generals/components/generals.header";
+import Back_Button from "@/modules/(no-tabs)/components/back-button";
 
 export default function Tabs_Layout ({ children } : { children: React.ReactNode }) {
     return (
@@ -8,14 +8,15 @@ export default function Tabs_Layout ({ children } : { children: React.ReactNode 
             <div>
                 <Header />
             </div>
+            <div className={'px-4 border-x-2 border-black box-border py-10'}>
+                    <Back_Button />
+            </div>
             <main className={'flex-1 px-4 border-x-2 border-black box-border overflow-y-auto hide-scrollbar'}>
-                <div className={'mx-auto w-full max-w-[800px]'}>
+                <div className={'mx-auto w-full max-w-[800px] pb-20'}>
                     { children }
                 </div>
             </main>
-            <div>
-                <Footer />
-            </div>
         </div>
     );
+
 }

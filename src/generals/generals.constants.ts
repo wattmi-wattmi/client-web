@@ -22,6 +22,7 @@ export const Api_Routes = {
     users : {
         all_or_search : ({ gender, limit, page, search } : User_Search_Queries_Interface) => {
            return `/api/users?gender=${gender || ''}&limit=${limit || ''}&page=${page || ''}&search=${search || ''}` as const;
-        }
+        },
+        by_username : (username : string) => `/api/users/${username}` as const,
     }
 } as const;

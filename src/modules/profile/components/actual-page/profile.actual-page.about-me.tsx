@@ -8,9 +8,10 @@ import {Profile_About_Me_Max_Length} from "@/modules/profile/profile.constants";
 
 interface About_Me_Props_Interface {
     about_me: User_Interface['about_me'];
+    is_own_profile : boolean;
 }
 
-export default function Actual_Profile_Page_About_Me({ about_me }: About_Me_Props_Interface) {
+export default function Actual_Profile_Page_About_Me({ about_me, is_own_profile }: About_Me_Props_Interface) {
     const [is_editing, set_is_editing] = React.useState<boolean>(false);
     const [error, set_error] = React.useState<string | null>(null);
     const [new_about_me, set_new_about_me] = React.useState<string | null>(about_me);
@@ -40,7 +41,7 @@ export default function Actual_Profile_Page_About_Me({ about_me }: About_Me_Prop
                 </div>
             )}
 
-            <Actual_Profile_Page_Button_Group is_editing={is_editing} set_is_editing={set_is_editing} set_error={set_error} user_data={{ about_me : new_about_me?.trim() || null }} />
+            { is_own_profile && <Actual_Profile_Page_Button_Group is_editing={is_editing} set_is_editing={set_is_editing} set_error={set_error} user_data={{ about_me : new_about_me?.trim() || null }} /> }
         </div>
     );
 }

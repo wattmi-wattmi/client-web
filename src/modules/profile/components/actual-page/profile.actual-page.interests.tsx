@@ -8,9 +8,10 @@ import {Icon} from "@iconify/react";
 
 interface Interests_Props_Interface {
     interests: User_Interface['interests'];
+    is_own_profile : boolean;
 }
 
-export default function Actual_Profile_Page_Interests({ interests }: Interests_Props_Interface) {
+export default function Actual_Profile_Page_Interests({ interests, is_own_profile }: Interests_Props_Interface) {
     const [is_editing, set_is_editing] = React.useState<boolean>(false);
     const [error, set_error] = React.useState<string | null>(null);
     const [new_interests, set_new_interests] = React.useState<string | null>(interests);
@@ -44,7 +45,7 @@ export default function Actual_Profile_Page_Interests({ interests }: Interests_P
                 </div>
             )}
             <div className={'text-red-500 text-sm'}>{ error }</div>
-            <Actual_Profile_Page_Button_Group is_editing={is_editing} set_is_editing={set_is_editing} set_error={set_error} user_data={{ interests : new_interests }} />
+            { is_own_profile && <Actual_Profile_Page_Button_Group is_editing={is_editing} set_is_editing={set_is_editing} set_error={set_error} user_data={{ interests : new_interests }} /> }
         </div>
     )
 

@@ -16,7 +16,7 @@ interface Props_Interface {
 
 export default function Actual_Profile_Page_Button_Group({ is_editing, set_is_editing, user_data, set_error }: Props_Interface) {
     const [loading, set_loading] = React.useState<boolean>(false);
-    const { set_me } = React.useContext(Auth_Context);
+    const { set_me, me } = React.useContext(Auth_Context);
 
     return (
         <div className={'absolute right-2 top-2 cursor-pointer flex items-center gap-2'}>
@@ -37,6 +37,7 @@ export default function Actual_Profile_Page_Button_Group({ is_editing, set_is_ed
         </div>
     )
     async function handle_update() {
+        if(!me) return;
         if(loading) return;
         set_loading(true);
         if(user_data.about_me && user_data.about_me.length > Profile_About_Me_Max_Length) {

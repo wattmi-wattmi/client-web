@@ -4,7 +4,7 @@ import React from "react";
 import Actual_Profile_Page_Button_Group
     from "@/modules/profile/components/actual-page/profile.actual-page.button-group";
 
-export default function Actual_Profile_Page_Name({name}: { name: string }) {
+export default function Actual_Profile_Page_Name({name, is_own_profile }: { name: string, is_own_profile: boolean }) {
     const [ is_editing, set_is_editing ] = React.useState<boolean>(false);
     const [ new_name, set_new_name ] = React.useState<string>(name);
     const input_ref = React.useRef<HTMLInputElement | null>(null);
@@ -29,7 +29,7 @@ export default function Actual_Profile_Page_Name({name}: { name: string }) {
             <div className={'text-red-500 text-sm'}>
                 { error }
             </div>
-            <Actual_Profile_Page_Button_Group is_editing={is_editing} set_is_editing={set_is_editing} set_error={set_error} user_data={{name: new_name}} />
+            { is_own_profile && <Actual_Profile_Page_Button_Group is_editing={is_editing} set_is_editing={set_is_editing} set_error={set_error} user_data={{name: new_name}} /> }
         </div>
     );
 }
